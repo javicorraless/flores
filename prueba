@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Para ti bonita 🌸</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to top, #dfffd6, #ffe6f0);
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      color: #b03060;
+      font-size: 2rem;
+    }
+
+    .flower {
+      position: absolute;
+      bottom: 0;
+      font-size: 2rem;
+      animation: grow 4s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes grow {
+      0% {
+        transform: translateY(100px) scale(0.2);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1> Espero que te gusten 💖</h1>
+
+  <script>
+    const flowers = ["🌸", "🌷", "🌹", "🌼", "💐"];
+
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * 100 + "%";
+
+      document.body.appendChild(flower);
+
+      setTimeout(() => {
+        flower.remove();
+      }, 4000);
+    }
+
+    setInterval(createFlower, 400);
+  </script>
+</body>
+</html>
