@@ -9,31 +9,35 @@
     body {
       margin: 0;
       overflow: hidden;
-      background: #dcd0ff;
+      background: #e6e6fa;
       font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+    }
+
+    .contenido {
+      margin-top: 40px;
+      padding: 0 20px;
+      z-index: 2;
     }
 
     h1 {
-      position: absolute;
-      top: 40px;
-      width: 100%;
-      text-align: center;
       color: white;
       font-size: 2rem;
+      margin: 0;
     }
 
     .mensaje {
-      position: absolute;
-      top: 100px;
-      width: 100%;
-      text-align: center;
+      margin-top: 12px;
       color: white;
-      font-size: 1.2rem;
-
-      /* centrar mejor */
-      max-width: 600px;
-      left: 50%;
-      transform: translateX(-50%);
+      font-size: 1.1rem;
+      max-width: 500px;
+      line-height: 1.4;
     }
 
     .flower {
@@ -42,6 +46,7 @@
       font-size: 2rem;
       animation: grow 4s ease-out forwards;
       opacity: 0;
+      z-index: 1;
     }
 
     @keyframes grow {
@@ -54,16 +59,27 @@
         opacity: 1;
       }
     }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .mensaje {
+        font-size: 1rem;
+        max-width: 90%;
+      }
+    }
   </style>
 </head>
 
 <body>
-
-  <h1>Estas flores son para ti bonita 🌸</h1>
-
-  <p class="mensaje">
-    Sé que quizás estás estresada por la pega, asiq espero que esto te saque una sonrisa <3
-  </p>
+  <div class="contenido">
+    <h1>Estas flores son para ti bonita 🌸</h1>
+    <p class="mensaje">
+      Sé que quizás estás estresada por la pega, asiq espero que esto te saque una sonrisa
+    </p>
+  </div>
 
   <script>
     const flowers = ["🌸", "🌷", "🌺", "🌼", "💮"];
@@ -78,6 +94,13 @@
 
       setTimeout(() => {
         flower.remove();
+      }, 4000);
+    }
+
+    setInterval(createFlower, 400);
+  </script>
+</body>
+</html>
       }, 4000);
     }
 
