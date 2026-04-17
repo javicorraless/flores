@@ -27,14 +27,14 @@
     }
 
     h1 {
-      color: black;
+      color: white;
       font-size: 2rem;
       margin: 0;
     }
 
     .mensaje {
       margin-top: 12px;
-      color: black;
+      color: white;
       font-size: 1.1rem;
       max-width: 500px;
       line-height: 1.4;
@@ -74,14 +74,14 @@
 </head>
 
 <body>
+
   <div class="contenido">
     <h1>Estas flores son para ti bonita 🌸</h1>
-    <p class="mensaje">
-      Sé que quizás estás estresada por la pega, asiq espero que esto te saque una sonrisa
-    </p>
+    <p class="mensaje" id="mensaje"></p>
   </div>
 
   <script>
+    // 🌸 FLORES
     const flowers = ["🌸", "🌷", "🌺", "🌼", "💮"];
 
     function createFlower() {
@@ -98,6 +98,34 @@
     }
 
     setInterval(createFlower, 400);
+
+    // 💬 MENSAJES (mañana / tarde-noche)
+    const mensajesManana = [
+      "Se que quizas estas estresada por la pega, asiq espero que esto te saque una sonrisa",
+      "Te extraño conita bella, ando pensando en ti",
+      "Animo con la pega preciosa, eres mi psicologa favorita",
+      "Cada flor es un besito que le daria a tu linda carita, te echo de menos conita"
+    ];
+
+    const mensajesTarde = [
+      "Espero que estes teniendo un muy lindo dia",
+      "Un mini recordatorio que te adoro y te extraño",
+      "Estoy contando los días para vernos preciosa",
+      "Espero que te guste este mini detallito muy ñoño, me encantas linda"
+    ];
+
+    function obtenerMensajePorHora() {
+      const hora = new Date().getHours();
+
+      if (hora < 12) {
+        return mensajesManana[Math.floor(Math.random() * mensajesManana.length)];
+      } else {
+        return mensajesTarde[Math.floor(Math.random() * mensajesTarde.length)];
+      }
+    }
+
+    document.getElementById("mensaje").textContent = obtenerMensajePorHora();
   </script>
+
 </body>
 </html>
