@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> flores para conita 🌸</title>
+  <title>flores para conita 🌸</title>
 
   <style>
     body {
@@ -82,7 +82,7 @@
 
   <script>
     // 🌸 FLORES
-    const flowers = ["🌸", "🌷", "🌺", "🌼", "💮"];
+    const flowers = ["🌸", "🌷", "🌺", "🌼", "💮","💗",];
 
     function createFlower() {
       const flower = document.createElement("div");
@@ -99,32 +99,72 @@
 
     setInterval(createFlower, 400);
 
-    // 💬 MENSAJES (mañana / tarde-noche)
-    const mensajesManana = [
-      "Se que quizas estas estresada por la pega, asiq espero que esto te saque una sonrisa",
+    // 💬 FRASES
+    const frases = [
+      "Que tengas un muy lindo día preciosa, espero haberte sacado una sonrisa con este detallito",
       "Te extraño conita bella, ando pensando en ti",
-      "Animo con la pega preciosa, eres mi psicologa favorita",
-      "Cada flor es un besito que le daria a tu linda carita, te echo de menos conita"
+      "Sé que quizás estas estresada por esos excels, ánimo conita no te rindas",
+      "Cada flor es un besito que le daria a tu linda carita, te echo de menos conita",
+      "Te pienso todos los días, quiero verte hermosa",
+      "Un mini recordatorio de que te quiero y te extraño un montón",
+      "Buenos días mi solcito bello, que tengas un excelente día",
+      "Espero que te guste este mini detallito muy ñoño, me encantas linda",
+      "Aquí puro buen trato hermosa",
+      "Sabes lo linda que te ves hoy? aunque en realidad todos los días te ves perfecta",
+      "Vamos preciosa ánimo un día más es un día menos para que podamos estar juntitas de nuevo",
+      "我喜欢你",
+      "Que carita tan preciosa que tienes",
+      "Love, it sustains you. It’s like oatmeal.",
+      "Ojalá haberte traído de souvenir",
+      "Quiero estar en tus brazos, siempre en tus brazos",
+      "Que no daría por besarte por abrazarte una vez más, eres inolvidable",
+      "Recuerdo cada momento especial contigo, hasta cuando me hiciste comer maki diciendome que era dulce",
+      "Tu polerón aún huele a ti, me encanta, me encantas coni",
+      "Me pone muy feliz pensar en tu sonrisa",
+      "Me encanta todo de ti, tu sonrisa, tus margaritas, tus cachetitos, tus ojitos hermosos, tus lunarsitos, eres realmente preciosa",
+      "Eres la ama de mi sol coni",
+      "Sabía que intentarías ver todas las frases el mismo día cuando te dieras cuenta que es más de una, asiq tuve que ingeniarmelas fjdkfnsj, me encantas preciosa",
+      "Ir a visitarte fue increíble, esos días contigo jamás los olvidaré, estaré esperando nuestra próxima cita",
+      "Me encanta dedicarte los atardeceres, porque los colores me recuerdan a ti",
+      "Para mi preciosa ladrona de copihues, te adoro"
     ];
 
-    const mensajesTarde = [
-      "Espero que estes teniendo un muy lindo dia",
-      "Un mini recordatorio que te adoro y te extraño",
-      "Estoy contando los días para vernos preciosa",
-      "Espero que te guste este mini detallito muy ñoño, me encantas linda"
-    ];
+    // 🌸 Frase diaria (cambia a las 8:00 am)
+    function obtenerFraseDiaria() {
+      const ahora = new Date();
 
-    function obtenerMensajePorHora() {
-      const hora = new Date().getHours();
+      const corteHoy = new Date();
+      corteHoy.setHours(8, 0, 0, 0);
 
-      if (hora < 12) {
-        return mensajesManana[Math.floor(Math.random() * mensajesManana.length)];
+      let ultimoCorte;
+
+      if (ahora >= corteHoy) {
+        ultimoCorte = corteHoy;
       } else {
-        return mensajesTarde[Math.floor(Math.random() * mensajesTarde.length)];
+        ultimoCorte = new Date(corteHoy);
+        ultimoCorte.setDate(ultimoCorte.getDate() - 1);
       }
+
+      const claveFecha = ultimoCorte.toISOString().split("T")[0];
+
+      const fraseGuardada = localStorage.getItem("fraseDiaria");
+      const fechaGuardada = localStorage.getItem("fechaFrase");
+
+      // Mantener misma frase hasta las próximas 8 am
+      if (fraseGuardada && fechaGuardada === claveFecha) {
+        return fraseGuardada;
+      }
+
+      // Elegir nueva frase
+      const nuevaFrase = frases[Math.floor(Math.random() * frases.length)];
+
+      localStorage.setItem("fraseDiaria", nuevaFrase);
+      localStorage.setItem("fechaFrase", claveFecha);
+
+      return nuevaFrase;
     }
 
-    document.getElementById("mensaje").textContent = obtenerMensajePorHora();
+    document.getElementById("mensaje").textContent = obtenerFraseDiaria();
   </script>
 
 </body>
