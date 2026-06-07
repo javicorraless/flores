@@ -20,10 +20,22 @@
       position: relative;
     }
 
-    .contenido {
+    .zona-texto {
       margin-top: 40px;
       padding: 0 20px;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .contenido {
+      padding: 0 20px;
+      z-index: 2;
+      max-width: 520px;
     }
 
     h1 {
@@ -36,8 +48,16 @@
       margin-top: 12px;
       color: white;
       font-size: 1.1rem;
-      max-width: 500px;
       line-height: 1.4;
+    }
+
+    .foto-lado {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 4px solid white;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
     }
 
     .flower {
@@ -60,14 +80,27 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
+      body {
+        overflow-y: auto;
+      }
+
+      .zona-texto {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .foto-lado {
+        width: 150px;
+        height: 150px;
+      }
+
       h1 {
         font-size: 1.6rem;
       }
 
       .mensaje {
         font-size: 1rem;
-        max-width: 90%;
       }
     }
   </style>
@@ -75,14 +108,19 @@
 
 <body>
 
-  <div class="contenido">
-    <h1>Estas flores son para ti bonita 🌸</h1>
-    <p class="mensaje" id="mensaje"></p>
+  <div class="zona-texto">
+    <img class="foto-lado" id="fotoIzquierda" src="" alt="Foto izquierda">
+
+    <div class="contenido">
+      <h1>Estas flores son para ti bonita 🌸</h1>
+      <p class="mensaje" id="mensaje"></p>
+    </div>
+
+    <img class="foto-lado" id="fotoDerecha" src="" alt="Foto derecha">
   </div>
 
   <script>
-    // 🌸 FLORES
-    const flowers = ["🌸", "🌷", "🌺", "🌼", "💮","💗",];
+    const flowers = ["🌸", "🌷", "🌺", "🌼", "💮", "💗"];
 
     function createFlower() {
       const flower = document.createElement("div");
@@ -99,7 +137,6 @@
 
     setInterval(createFlower, 400);
 
-    // 💬 FRASES
     const frases = [
       "Que tengas un muy lindo día preciosa, espero haberte sacado una sonrisa con este detallito",
       "Te extraño conita bella, ando pensando en ti",
@@ -133,7 +170,6 @@
       "Me cambias el mundo con tu sonrisa preciosa, derrepente el sol no brilla tan fuerte como tus ojitos que me hipnotizan cuando me miran"
     ];
 
-    // 🌸 Frase diaria (cambia a las 8:00 am)
     function obtenerFraseDiaria() {
       const ahora = new Date();
 
@@ -154,12 +190,10 @@
       const fraseGuardada = localStorage.getItem("fraseDiaria");
       const fechaGuardada = localStorage.getItem("fechaFrase");
 
-      // Mantener misma frase hasta las próximas 8 am
       if (fraseGuardada && fechaGuardada === claveFecha) {
         return fraseGuardada;
       }
 
-      // Elegir nueva frase
       const nuevaFrase = frases[Math.floor(Math.random() * frases.length)];
 
       localStorage.setItem("fraseDiaria", nuevaFrase);
@@ -169,6 +203,29 @@
     }
 
     document.getElementById("mensaje").textContent = obtenerFraseDiaria();
+
+    const fotos = [
+      "fotos/foto1.jpg",
+      "fotos/foto2.jpg",
+      "fotos/foto3.jpg",
+      "fotos/foto4.jpg"
+    ];
+
+    function mostrarFotosAleatorias() {
+      if (fotos.length < 2) return;
+
+      const indiceIzquierda = Math.floor(Math.random() * fotos.length);
+
+      let indiceDerecha;
+      do {
+        indiceDerecha = Math.floor(Math.random() * fotos.length);
+      } while (indiceDerecha === indiceIzquierda);
+
+      document.getElementById("fotoIzquierda").src = fotos[indiceIzquierda];
+      document.getElementById("fotoDerecha").src = fotos[indiceDerecha];
+    }
+
+    mostrarFotosAleatorias();
   </script>
 
 </body>
