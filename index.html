@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>flores para conita ❤️</title>
+
+  <title>Flores para Conita ❤️</title>
 
   <style>
     body {
@@ -15,7 +16,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
       position: relative;
     }
@@ -42,6 +43,7 @@
       color: white;
       font-size: 2rem;
       margin: 0;
+      text-shadow: 0 2px 8px rgba(80, 40, 120, 0.25);
     }
 
     .mensaje {
@@ -49,6 +51,7 @@
       color: white;
       font-size: 1.1rem;
       line-height: 1.4;
+      text-shadow: 0 2px 8px rgba(80, 40, 120, 0.25);
     }
 
     .foto-lado {
@@ -57,8 +60,10 @@
       object-fit: cover;
       border-radius: 24px;
       border: 4px solid white;
-      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
+
+    /* Flores animadas */
 
     .flower {
       position: absolute;
@@ -67,6 +72,7 @@
       animation: grow 4s ease-out forwards;
       opacity: 0;
       z-index: 1;
+      pointer-events: none;
     }
 
     @keyframes grow {
@@ -74,20 +80,45 @@
         transform: translateY(100px) scale(0.2);
         opacity: 0;
       }
+
       100% {
         transform: translateY(-200px) scale(1.5);
         opacity: 1;
       }
     }
 
+    /* Video de YouTube */
+
+    .video-cancion {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 10;
+    }
+
+    .video-cancion iframe {
+      display: block;
+      width: 280px;
+      height: 158px;
+      border: 4px solid white;
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(80, 40, 120, 0.35);
+      background: black;
+    }
+
+    /* Diseño para teléfonos */
+
     @media (max-width: 800px) {
       body {
         overflow-y: auto;
+        padding-bottom: 150px;
+        box-sizing: border-box;
       }
 
       .zona-texto {
         flex-direction: column;
         gap: 15px;
+        margin-top: 25px;
       }
 
       .foto-lado {
@@ -102,6 +133,18 @@
       .mensaje {
         font-size: 1rem;
       }
+
+      .video-cancion {
+        left: 10px;
+        bottom: 10px;
+      }
+
+      .video-cancion iframe {
+        width: 190px;
+        height: 107px;
+        border-width: 3px;
+        border-radius: 14px;
+      }
     }
   </style>
 </head>
@@ -109,14 +152,40 @@
 <body>
 
   <div class="zona-texto">
-    <img class="foto-lado" id="fotoIzquierda" src="" alt="Foto izquierda">
+
+    <img
+      class="foto-lado"
+      id="fotoIzquierda"
+      src=""
+      alt="Foto izquierda"
+    >
 
     <div class="contenido">
-      <h1>Estas flores son para ti mi amorcita</h1>
+      <h1>Estas flores son para ti, mi amorcita ❤️</h1>
+
       <p class="mensaje" id="mensaje"></p>
     </div>
 
-    <img class="foto-lado" id="fotoDerecha" src="" alt="Foto derecha">
+    <img
+      class="foto-lado"
+      id="fotoDerecha"
+      src=""
+      alt="Foto derecha"
+    >
+
+  </div>
+
+  <!-- Video de YouTube -->
+
+  <div class="video-cancion">
+    <iframe
+      src="https://www.youtube.com/embed/IkcuShU9_nk"
+      title="Canción para Conita"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
   </div>
 
   <script>
@@ -124,8 +193,12 @@
 
     function createFlower() {
       const flower = document.createElement("div");
+
       flower.classList.add("flower");
-      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+      flower.textContent =
+        flowers[Math.floor(Math.random() * flowers.length)];
+
       flower.style.left = Math.random() * 100 + "%";
 
       document.body.appendChild(flower);
@@ -174,7 +247,11 @@
         ultimoCorte.setDate(ultimoCorte.getDate() - 1);
       }
 
-      const claveFecha = ultimoCorte.toISOString().split("T")[0];
+      const año = ultimoCorte.getFullYear();
+      const mes = String(ultimoCorte.getMonth() + 1).padStart(2, "0");
+      const dia = String(ultimoCorte.getDate()).padStart(2, "0");
+
+      const claveFecha = `${año}-${mes}-${dia}`;
 
       const fraseGuardada = localStorage.getItem("fraseDiaria");
       const fechaGuardada = localStorage.getItem("fechaFrase");
@@ -183,7 +260,8 @@
         return fraseGuardada;
       }
 
-      const nuevaFrase = frases[Math.floor(Math.random() * frases.length)];
+      const nuevaFrase =
+        frases[Math.floor(Math.random() * frases.length)];
 
       localStorage.setItem("fraseDiaria", nuevaFrase);
       localStorage.setItem("fechaFrase", claveFecha);
@@ -191,7 +269,8 @@
       return nuevaFrase;
     }
 
-    document.getElementById("mensaje").textContent = obtenerFraseDiaria();
+    document.getElementById("mensaje").textContent =
+      obtenerFraseDiaria();
 
     const fotos = [
       "fotos/127791eb-e1a7-46f0-ab85-324a3d14ea75.jpg",
@@ -236,17 +315,25 @@
     ];
 
     function mostrarFotosAleatorias() {
-      if (fotos.length < 2) return;
+      if (fotos.length < 2) {
+        return;
+      }
 
-      const indiceIzquierda = Math.floor(Math.random() * fotos.length);
+      const indiceIzquierda =
+        Math.floor(Math.random() * fotos.length);
 
       let indiceDerecha;
+
       do {
-        indiceDerecha = Math.floor(Math.random() * fotos.length);
+        indiceDerecha =
+          Math.floor(Math.random() * fotos.length);
       } while (indiceDerecha === indiceIzquierda);
 
-      document.getElementById("fotoIzquierda").src = fotos[indiceIzquierda];
-      document.getElementById("fotoDerecha").src = fotos[indiceDerecha];
+      document.getElementById("fotoIzquierda").src =
+        fotos[indiceIzquierda];
+
+      document.getElementById("fotoDerecha").src =
+        fotos[indiceDerecha];
     }
 
     mostrarFotosAleatorias();
