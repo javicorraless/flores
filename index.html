@@ -7,6 +7,10 @@
   <title>Flores para Conita ❤️</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       overflow: hidden;
@@ -23,14 +27,13 @@
 
     .zona-texto {
       margin-top: 40px;
-      padding: 0 20px;
+      padding: 0 40px;
       z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 40px;
       width: 100%;
-      box-sizing: border-box;
     }
 
     .contenido {
@@ -47,10 +50,10 @@
     }
 
     .mensaje {
-      margin-top: 12px;
+      margin-top: 14px;
       color: white;
       font-size: 1.1rem;
-      line-height: 1.4;
+      line-height: 1.5;
       text-shadow: 0 2px 8px rgba(80, 40, 120, 0.25);
     }
 
@@ -69,7 +72,7 @@
       position: absolute;
       bottom: 0;
       font-size: 2rem;
-      animation: grow 4s ease-out forwards;
+      animation: grow 5s ease-out forwards;
       opacity: 0;
       z-index: 1;
       pointer-events: none;
@@ -81,28 +84,78 @@
         opacity: 0;
       }
 
+      25% {
+        opacity: 0.8;
+      }
+
       100% {
-        transform: translateY(-200px) scale(1.5);
-        opacity: 1;
+        transform: translateY(-250px) scale(1.35);
+        opacity: 0;
       }
     }
 
-    /* Video de YouTube */
+    /* Botón de música */
 
-    .video-cancion {
+    .musica {
       position: fixed;
       left: 20px;
       bottom: 20px;
-      z-index: 10;
+      z-index: 20;
     }
 
-    .video-cancion iframe {
+    .boton-musica {
+      width: 58px;
+      height: 58px;
+      padding: 0;
+      border: 3px solid white;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 1.6rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(80, 40, 120, 0.25);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .boton-musica:hover {
+      transform: scale(1.08);
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .boton-musica:active {
+      transform: scale(0.96);
+    }
+
+    /* Reproductor desplegable */
+
+    .reproductor {
+      position: absolute;
+      left: 0;
+      bottom: 72px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px) scale(0.95);
+      transform-origin: bottom left;
+      transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .reproductor.activo {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .reproductor iframe {
       display: block;
       width: 280px;
       height: 158px;
-      border: 4px solid white;
+      border: 3px solid white;
       border-radius: 18px;
-      box-shadow: 0 4px 20px rgba(80, 40, 120, 0.35);
+      box-shadow: 0 6px 24px rgba(80, 40, 120, 0.3);
       background: black;
     }
 
@@ -111,14 +164,18 @@
     @media (max-width: 800px) {
       body {
         overflow-y: auto;
-        padding-bottom: 150px;
-        box-sizing: border-box;
+        padding-bottom: 100px;
       }
 
       .zona-texto {
         flex-direction: column;
         gap: 15px;
         margin-top: 25px;
+        padding: 0 20px;
+      }
+
+      .contenido {
+        order: -1;
       }
 
       .foto-lado {
@@ -134,15 +191,24 @@
         font-size: 1rem;
       }
 
-      .video-cancion {
-        left: 10px;
-        bottom: 10px;
+      .musica {
+        left: 12px;
+        bottom: 12px;
       }
 
-      .video-cancion iframe {
-        width: 190px;
-        height: 107px;
-        border-width: 3px;
+      .boton-musica {
+        width: 52px;
+        height: 52px;
+        font-size: 1.4rem;
+      }
+
+      .reproductor {
+        bottom: 64px;
+      }
+
+      .reproductor iframe {
+        width: 220px;
+        height: 124px;
         border-radius: 14px;
       }
     }
@@ -162,7 +228,6 @@
 
     <div class="contenido">
       <h1>Estas flores son para ti, mi amorcita ❤️</h1>
-
       <p class="mensaje" id="mensaje"></p>
     </div>
 
@@ -175,17 +240,29 @@
 
   </div>
 
-  <!-- Video de YouTube -->
+  <!-- Botón y reproductor de música -->
 
-  <div class="video-cancion">
-    <iframe
-      src="https://www.youtube.com/embed/IkcuShU9_nk"
-      title="Te la dedico"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
+  <div class="musica">
+    <button
+      class="boton-musica"
+      id="botonMusica"
+      type="button"
+      aria-label="Abrir canción"
+      aria-expanded="false"
+    >
+      🎵
+    </button>
+
+    <div class="reproductor" id="reproductor">
+      <iframe
+        src="https://www.youtube.com/embed/IkcuShU9_nk"
+        title="Canción para Conita"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
   <script>
@@ -195,20 +272,22 @@
       const flower = document.createElement("div");
 
       flower.classList.add("flower");
-
       flower.textContent =
         flowers[Math.floor(Math.random() * flowers.length)];
 
       flower.style.left = Math.random() * 100 + "%";
 
+      const tamaño = 1.4 + Math.random() * 1.2;
+      flower.style.fontSize = tamaño + "rem";
+
       document.body.appendChild(flower);
 
       setTimeout(() => {
         flower.remove();
-      }, 4000);
+      }, 5000);
     }
 
-    setInterval(createFlower, 400);
+    setInterval(createFlower, 700);
 
     const frases = [
       "Gracias por pasar tus vacaciones conmigo, lo pase increíble.",
@@ -337,6 +416,41 @@
     }
 
     mostrarFotosAleatorias();
+
+    /* Abrir y cerrar el reproductor */
+
+    const botonMusica = document.getElementById("botonMusica");
+    const reproductor = document.getElementById("reproductor");
+
+    botonMusica.addEventListener("click", () => {
+      const estaActivo =
+        reproductor.classList.toggle("activo");
+
+      botonMusica.setAttribute(
+        "aria-expanded",
+        estaActivo.toString()
+      );
+
+      botonMusica.textContent = estaActivo ? "✕" : "🎵";
+      botonMusica.setAttribute(
+        "aria-label",
+        estaActivo ? "Cerrar canción" : "Abrir canción"
+      );
+    });
+
+    /* Cerrar al presionar Escape */
+
+    document.addEventListener("keydown", (evento) => {
+      if (
+        evento.key === "Escape" &&
+        reproductor.classList.contains("activo")
+      ) {
+        reproductor.classList.remove("activo");
+        botonMusica.textContent = "🎵";
+        botonMusica.setAttribute("aria-expanded", "false");
+        botonMusica.setAttribute("aria-label", "Abrir canción");
+      }
+    });
   </script>
 
 </body>
