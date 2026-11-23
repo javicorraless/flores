@@ -2,361 +2,100 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Flores para Conita ❤️</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🚧 Pagina en remodelación 🏗️</title>
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      overflow-x: hidden;
-      background: #d0bfff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      text-align: center;
-      position: relative;
-    }
-
-    .zona-texto {
       display: grid;
-      grid-template-columns: minmax(0, 240px) minmax(0, 520px) minmax(0, 240px);
-      grid-template-areas:
-        "arriba-izquierda texto arriba-derecha"
-        "abajo-izquierda texto abajo-derecha";
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      padding: 24px;
       place-items: center;
-      justify-content: center;
-      gap: 24px;
-      width: 100%;
-      padding: 40px 24px;
-      z-index: 2;
+      background: #dedede;
+      color: #222;
+      font-family: system-ui, sans-serif;
+      text-align: center;
     }
 
-    #fotoIzquierda { grid-area: arriba-izquierda; }
-    #fotoDerecha { grid-area: arriba-derecha; }
-    #fotoAbajoIzquierda { grid-area: abajo-izquierda; }
-    #fotoAbajoDerecha { grid-area: abajo-derecha; }
-
-    .contenido {
-      grid-area: texto;
-      padding: 0 20px;
-      z-index: 2;
-      max-width: 520px;
+    main {
+      max-width: 38rem;
     }
 
     h1 {
-      color: white;
-      font-size: 2rem;
       margin: 0;
-      text-shadow: 0 2px 8px rgba(80, 40, 120, 0.25);
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      line-height: 1.2;
     }
 
-    .mensaje {
-      margin-top: 14px;
-      color: white;
-      font-size: 1.1rem;
-      line-height: 1.5;
-      text-shadow: 0 2px 8px rgba(80, 40, 120, 0.25);
+    p {
+      margin: 16px 0 0;
+      font-size: clamp(1rem, 3vw, 1.15rem);
+      line-height: 1.6;
     }
 
-    .foto-lado {
-      width: 100%;
+    .cargando {
+      position: relative;
+      width: 80px;
       aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 24px;
-      border: 4px solid white;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      margin: 0 auto 28px;
+      animation: girar 1.2s steps(16) infinite;
     }
 
-    /* Flores animadas */
-
-    .flower {
+    .cargando span {
       position: absolute;
-      bottom: 0;
-      font-size: 2rem;
-      animation: grow 5s ease-out forwards;
-      opacity: 0;
-      z-index: 1;
-      pointer-events: none;
+      inset: 0;
+      transform: rotate(calc(var(--posicion) * 22.5deg));
     }
 
-    @keyframes grow {
-      0% {
-        transform: translateY(100px) scale(0.2);
-        opacity: 0;
-      }
-
-      25% {
-        opacity: 0.8;
-      }
-
-      100% {
-        transform: translateY(-250px) scale(1.35);
-        opacity: 0;
-      }
+    .cargando span::before {
+      display: block;
+      width: 7%;
+      height: 21%;
+      margin-inline: auto;
+      border-radius: 999px;
+      background: #161616;
+      opacity: calc(1 - var(--posicion) * 0.055);
+      content: "";
     }
 
-    @media (max-width: 800px) {
-      .zona-texto {
-        grid-template-columns: repeat(2, minmax(0, 240px));
-        grid-template-areas:
-          "texto texto"
-          "arriba-izquierda arriba-derecha"
-          "abajo-izquierda abajo-derecha";
-        gap: 12px;
-        padding: 25px 16px;
-      }
+    @keyframes girar {
+      to { transform: rotate(1turn); }
+    }
 
-      .contenido {
-        padding: 0;
-      }
-
-      h1 {
-        font-size: 1.6rem;
-      }
-
-      .mensaje {
-        font-size: 1rem;
+    @media (prefers-reduced-motion: reduce) {
+      .cargando {
+        animation: none;
       }
     }
   </style>
 </head>
-
 <body>
-
-  <div class="zona-texto">
-
-    <img
-      class="foto-lado"
-      id="fotoIzquierda"
-      alt="Foto izquierda"
-    >
-
-    <div class="contenido">
-      <h1>Estas flores son para ti, mi amorcita ❤️</h1>
-      <p class="mensaje" id="mensaje"></p>
+  <main>
+    <div class="cargando" aria-hidden="true">
+      <span style="--posicion: 0"></span>
+      <span style="--posicion: 1"></span>
+      <span style="--posicion: 2"></span>
+      <span style="--posicion: 3"></span>
+      <span style="--posicion: 4"></span>
+      <span style="--posicion: 5"></span>
+      <span style="--posicion: 6"></span>
+      <span style="--posicion: 7"></span>
+      <span style="--posicion: 8"></span>
+      <span style="--posicion: 9"></span>
+      <span style="--posicion: 10"></span>
+      <span style="--posicion: 11"></span>
+      <span style="--posicion: 12"></span>
+      <span style="--posicion: 13"></span>
+      <span style="--posicion: 14"></span>
+      <span style="--posicion: 15"></span>
     </div>
-
-    <img
-      class="foto-lado"
-      id="fotoDerecha"
-      alt="Foto derecha"
-    >
-
-    <img
-      class="foto-lado"
-      id="fotoAbajoIzquierda"
-      alt="Foto inferior izquierda"
-    >
-
-    <img
-      class="foto-lado"
-      id="fotoAbajoDerecha"
-      alt="Foto inferior derecha"
-    >
-
-  </div>
-
-  <script>
-    const flowers = ["🌸", "🌷", "🌺", "🌼", "💮", "💗"];
-
-    function createFlower() {
-      const flower = document.createElement("div");
-
-      flower.classList.add("flower");
-      flower.textContent =
-        flowers[Math.floor(Math.random() * flowers.length)];
-
-      flower.style.left = Math.random() * 100 + "%";
-
-      const tamaño = 1.4 + Math.random() * 1.2;
-      flower.style.fontSize = tamaño + "rem";
-
-      document.body.appendChild(flower);
-
-      setTimeout(() => {
-        flower.remove();
-      }, 5000);
-    }
-
-    setInterval(createFlower, 400);
-
-    const frases = [
-      "Gracias por pasar tus vacaciones conmigo, lo pase increíble.",
-      "Espero con ansias nuestro reencuentro.",
-      "Me derrito de amor por ti, te adoro",
-      "Cada flor es un besito que le daria a tu linda carita, te echo de menos mi amorcita",
-      "Aunque estemos lejos quiero que sepas que siempre te llevo en mi corazoncito",
-      "Gracias por los regalitos que me hiciste, especialmente la vaquita que me acompaña todas las noches cuando tu no estas",
-      "Extraño dormir contigo, me traes mucha paz y muchisima felicidad",
-      "Pero que hermosa te ves el día de hoy, me encantasss preciosa, hermosa, bella, linda, mi amorcitaaa",
-      "Buenos días a mi licenciada favorita!! a la psicologa más inteligente, con las actividades más entretenidas, te adoroooo",
-      "Adoro pasar tiempo contigo hermosa, me encantas",
-      "Aunque me duela cuando te tienes que ir, sé que siempre volverás a estar entre mis brazos tarde o temprano",
-      "我喜欢你",
-      "Te llevo en mi corazoncito todos los días de mi vida",
-      "Cada flor que ves aqui te la haría de verdad con limpiapipas",
-      "Estoy taaaan enamorada de ti coni, muero de amor por ti",
-      "Tus abrazos son muy calidos, tus besos me llenan de amor, tus nanais son mi lugaar seguro",
-      "Siempre haré todo lo que pueda por ver tu sonrisita hermosa, todo esfuerzo vale la pena por ti",
-      "Recuerdo cada momento especial contigo, cada foto, cada risa, cada beso, cada conversación, cada regaloneo. Te estoy empezando a amar",
-      "Manche tu poleron, upsi, perdoname amorcita"
-    ];
-
-    function obtenerFraseDiaria() {
-      const ahora = new Date();
-
-      const corteHoy = new Date();
-      corteHoy.setHours(8, 0, 0, 0);
-
-      let ultimoCorte;
-
-      if (ahora >= corteHoy) {
-        ultimoCorte = corteHoy;
-      } else {
-        ultimoCorte = new Date(corteHoy);
-        ultimoCorte.setDate(ultimoCorte.getDate() - 1);
-      }
-
-      const año = ultimoCorte.getFullYear();
-      const mes = String(ultimoCorte.getMonth() + 1).padStart(2, "0");
-      const dia = String(ultimoCorte.getDate()).padStart(2, "0");
-
-      const claveFecha = `${año}-${mes}-${dia}`;
-
-      const fraseGuardada = localStorage.getItem("fraseDiaria");
-      const fechaGuardada = localStorage.getItem("fechaFrase");
-
-      if (fraseGuardada && fechaGuardada === claveFecha) {
-        return fraseGuardada;
-      }
-
-      const nuevaFrase =
-        frases[Math.floor(Math.random() * frases.length)];
-
-      localStorage.setItem("fraseDiaria", nuevaFrase);
-      localStorage.setItem("fechaFrase", claveFecha);
-
-      return nuevaFrase;
-    }
-
-    document.getElementById("mensaje").textContent =
-      obtenerFraseDiaria();
-
-    const fotos = [
-      "fotos/127791eb-e1a7-46f0-ab85-324a3d14ea75.jpg",
-      "fotos/368e13f7-dda7-4150-8baf-0c370da1f3fd.jpg",
-      "fotos/395AA58F-287C-476B-AC9F-FE2A010B94E4.jpg",
-      "fotos/551e9b56-63c6-4232-a191-19bdae414ba4.jpg",
-      "fotos/5681904D-D08B-4C09-A5FA-B10F42C341D8.jpg",
-      "fotos/71B3BBE6-6047-4400-AA4B-D3D42FC1228F.jpg",
-      "fotos/99998b10-3a93-495b-9e26-ae732822d4ad.jpg",
-      "fotos/IMG_6284.jpg",
-      "fotos/IMG_6296.jpg",
-      "fotos/IMG_6335.jpg",
-      "fotos/IMG_6342.jpg",
-      "fotos/IMG_6397.jpg",
-      "fotos/IMG_6398.jpg",
-      "fotos/IMG_6402.jpg",
-      "fotos/IMG_6403.jpg",
-      "fotos/IMG_6543.jpg",
-      "fotos/a11902c0-323f-44ce-a2ea-2fbfcb5e64dd.jpg",
-      "fotos/c83a3eb6-6f40-407a-a50f-c177435d052f.jpg",
-      "fotos/f7e34eec-c1dd-4caf-87df-fa46598ce0b4.jpg",
-      "fotos/img1.jpeg",
-      "fotos/img2.jpeg",
-      "fotos/img3.jpeg",
-      "fotos/img4.jpeg",
-      "fotos/img5.jpeg",
-      "fotos/img6.jpeg",
-      "fotos/img7.jpeg",
-      "fotos/img8.jpeg",
-      "fotos/img9.jpeg",
-      "fotos/img10.jpeg",
-      "fotos/img11.jpeg",
-      "fotos/img12.jpeg",
-      "fotos/img13.jpeg",
-      "fotos/img14.jpeg",
-      "fotos/img15.jpeg",
-      "fotos/img16.jpeg",
-      "fotos/img17.jpeg",
-      "fotos/img18.jpeg",
-      "fotos/img19.jpeg",
-      "fotos/img20.jpeg",
-      "fotos/img21.jpeg",
-      "fotos/img22.jpeg",
-      "fotos/img23.jpeg",
-      "fotos/img24.jpeg",
-      "fotos/img25.jpeg",
-      "fotos/img26.jpeg",
-      "fotos/img27.jpeg",
-      "fotos/img28.jpeg",
-      "fotos/img29.jpeg",
-      "fotos/img30.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%281%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%282%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%283%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%284%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%285%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%286%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%287%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%288%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%281%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2810%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2811%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2812%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2813%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2814%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2815%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2816%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2817%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2818%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2819%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%282%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2820%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2821%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2822%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2823%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2824%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2825%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2826%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2827%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2828%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2829%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%283%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2830%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%284%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%285%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%286%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%287%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%288%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%289%29.jpeg",
-      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM.jpeg"
-    ];
-
-    function mostrarFotosAleatorias() {
-      const disponibles = [...fotos];
-      const espacios = document.querySelectorAll(".foto-lado");
-
-      for (const espacio of espacios) {
-        if (disponibles.length === 0) break;
-
-        const indice = Math.floor(Math.random() * disponibles.length);
-        const [foto] = disponibles.splice(indice, 1);
-        espacio.src = foto;
-      }
-    }
-
-    mostrarFotosAleatorias();
-  </script>
-
+    <h1>🚧 Pagina en remodelación 🏗️</h1>
+    <p>Ups, lo siento amor, creo que la pagina de tus flores esta indisponible debido a una sorpresa que aparecerá en los próximos días</p>
+  </main>
 </body>
 </html>
