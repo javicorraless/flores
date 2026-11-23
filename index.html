@@ -13,7 +13,7 @@
 
     body {
       margin: 0;
-      overflow: hidden;
+      overflow-x: hidden;
       background: #d0bfff;
       font-family: Arial, sans-serif;
       display: flex;
@@ -26,17 +26,26 @@
     }
 
     .zona-texto {
-      margin-top: 40px;
-      padding: 0 40px;
-      z-index: 2;
-      display: flex;
-      align-items: center;
+      display: grid;
+      grid-template-columns: minmax(0, 240px) minmax(0, 520px) minmax(0, 240px);
+      grid-template-areas:
+        "arriba-izquierda texto arriba-derecha"
+        "abajo-izquierda texto abajo-derecha";
+      place-items: center;
       justify-content: center;
-      gap: 40px;
+      gap: 24px;
       width: 100%;
+      padding: 40px 24px;
+      z-index: 2;
     }
 
+    #fotoIzquierda { grid-area: arriba-izquierda; }
+    #fotoDerecha { grid-area: arriba-derecha; }
+    #fotoAbajoIzquierda { grid-area: abajo-izquierda; }
+    #fotoAbajoDerecha { grid-area: abajo-derecha; }
+
     .contenido {
+      grid-area: texto;
       padding: 0 20px;
       z-index: 2;
       max-width: 520px;
@@ -58,8 +67,8 @@
     }
 
     .foto-lado {
-      width: 240px;
-      height: 240px;
+      width: 100%;
+      aspect-ratio: 1;
       object-fit: cover;
       border-radius: 24px;
       border: 4px solid white;
@@ -94,93 +103,19 @@
       }
     }
 
-    /* Botón de música */
-
-    .musica {
-      position: fixed;
-      left: 20px;
-      bottom: 20px;
-      z-index: 20;
-    }
-
-    .boton-musica {
-      width: 58px;
-      height: 58px;
-      padding: 0;
-      border: 3px solid white;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      font-size: 1.6rem;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(80, 40, 120, 0.25);
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .boton-musica:hover {
-      transform: scale(1.08);
-      background: rgba(255, 255, 255, 0.6);
-    }
-
-    .boton-musica:active {
-      transform: scale(0.96);
-    }
-
-    /* Reproductor desplegable */
-
-    .reproductor {
-      position: absolute;
-      left: 0;
-      bottom: 72px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px) scale(0.95);
-      transform-origin: bottom left;
-      transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease,
-        transform 0.25s ease;
-    }
-
-    .reproductor.activo {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-
-    .reproductor iframe {
-      display: block;
-      width: 280px;
-      height: 158px;
-      border: 3px solid white;
-      border-radius: 18px;
-      box-shadow: 0 6px 24px rgba(80, 40, 120, 0.3);
-      background: black;
-    }
-
-    /* Diseño para teléfonos */
-
     @media (max-width: 800px) {
-      body {
-        overflow-y: auto;
-        padding-bottom: 100px;
-      }
-
       .zona-texto {
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 25px;
-        padding: 0 20px;
+        grid-template-columns: repeat(2, minmax(0, 240px));
+        grid-template-areas:
+          "texto texto"
+          "arriba-izquierda arriba-derecha"
+          "abajo-izquierda abajo-derecha";
+        gap: 12px;
+        padding: 25px 16px;
       }
 
       .contenido {
-        order: -1;
-      }
-
-      .foto-lado {
-        width: 180px;
-        height: 180px;
+        padding: 0;
       }
 
       h1 {
@@ -189,27 +124,6 @@
 
       .mensaje {
         font-size: 1rem;
-      }
-
-      .musica {
-        left: 12px;
-        bottom: 12px;
-      }
-
-      .boton-musica {
-        width: 52px;
-        height: 52px;
-        font-size: 1.4rem;
-      }
-
-      .reproductor {
-        bottom: 64px;
-      }
-
-      .reproductor iframe {
-        width: 220px;
-        height: 124px;
-        border-radius: 14px;
       }
     }
   </style>
@@ -222,7 +136,6 @@
     <img
       class="foto-lado"
       id="fotoIzquierda"
-      src=""
       alt="Foto izquierda"
     >
 
@@ -234,35 +147,21 @@
     <img
       class="foto-lado"
       id="fotoDerecha"
-      src=""
       alt="Foto derecha"
     >
 
-  </div>
-
-  <!-- Botón y reproductor de música -->
-
-  <div class="musica">
-    <button
-      class="boton-musica"
-      id="botonMusica"
-      type="button"
-      aria-label="Abrir canción"
-      aria-expanded="false"
+    <img
+      class="foto-lado"
+      id="fotoAbajoIzquierda"
+      alt="Foto inferior izquierda"
     >
-      🎵
-    </button>
 
-    <div class="reproductor" id="reproductor">
-      <iframe
-        src="https://www.youtube.com/embed/videoseries?list=PLaCa-iCqPx8c"
-        title="Playlist"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-      </iframe>
-    </div>
+    <img
+      class="foto-lado"
+      id="fotoAbajoDerecha"
+      alt="Foto inferior derecha"
+    >
+
   </div>
 
   <script>
@@ -400,67 +299,63 @@
       "fotos/img27.jpeg",
       "fotos/img28.jpeg",
       "fotos/img29.jpeg",
-      "fotos/img30.jpeg"
+      "fotos/img30.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%281%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%282%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%283%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%284%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%285%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%286%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%287%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM%20%288%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.00%20PM.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%281%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2810%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2811%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2812%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2813%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2814%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2815%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2816%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2817%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2818%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2819%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%282%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2820%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2821%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2822%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2823%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2824%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2825%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2826%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2827%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2828%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2829%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%283%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%2830%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%284%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%285%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%286%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%287%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%288%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM%20%289%29.jpeg",
+      "fotos/WhatsApp%20Image%202026-11-23%20at%206.34.10%20PM.jpeg"
     ];
 
     function mostrarFotosAleatorias() {
-      if (fotos.length < 2) {
-        return;
+      const disponibles = [...fotos];
+      const espacios = document.querySelectorAll(".foto-lado");
+
+      for (const espacio of espacios) {
+        if (disponibles.length === 0) break;
+
+        const indice = Math.floor(Math.random() * disponibles.length);
+        const [foto] = disponibles.splice(indice, 1);
+        espacio.src = foto;
       }
-
-      const indiceIzquierda =
-        Math.floor(Math.random() * fotos.length);
-
-      let indiceDerecha;
-
-      do {
-        indiceDerecha =
-          Math.floor(Math.random() * fotos.length);
-      } while (indiceDerecha === indiceIzquierda);
-
-      document.getElementById("fotoIzquierda").src =
-        fotos[indiceIzquierda];
-
-      document.getElementById("fotoDerecha").src =
-        fotos[indiceDerecha];
     }
 
     mostrarFotosAleatorias();
-
-    /* Abrir y cerrar el reproductor */
-
-    const botonMusica = document.getElementById("botonMusica");
-    const reproductor = document.getElementById("reproductor");
-
-    botonMusica.addEventListener("click", () => {
-      const estaActivo =
-        reproductor.classList.toggle("activo");
-
-      botonMusica.setAttribute(
-        "aria-expanded",
-        estaActivo.toString()
-      );
-
-      botonMusica.textContent = estaActivo ? "✕" : "🎵";
-      botonMusica.setAttribute(
-        "aria-label",
-        estaActivo ? "Cerrar canción" : "Abrir canción"
-      );
-    });
-
-    /* Cerrar al presionar Escape */
-
-    document.addEventListener("keydown", (evento) => {
-      if (
-        evento.key === "Escape" &&
-        reproductor.classList.contains("activo")
-      ) {
-        reproductor.classList.remove("activo");
-        botonMusica.textContent = "🎵";
-        botonMusica.setAttribute("aria-expanded", "false");
-        botonMusica.setAttribute("aria-label", "Abrir canción");
-      }
-    });
   </script>
 
 </body>
