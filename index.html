@@ -3,99 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>🚧 Pagina en remodelación 🏗️</title>
+  <title>¡¡ FELICIDADES POR APROBAR !! ¡¡ PULGUITA ERES PSICÓLOGA 🥳!!</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      display: grid;
       min-height: 100vh;
       min-height: 100svh;
       margin: 0;
-      padding: 24px;
-      place-items: center;
-      background: #dedede;
-      color: #222;
-      font-family: system-ui, sans-serif;
-      text-align: center;
+      background: #100c23 url("fondo-sorpresa.jpg") 65% center / cover no-repeat;
     }
 
     main {
-      max-width: 38rem;
+      position: relative;
+      z-index: 1;
+      padding: clamp(24px, 7vh, 72px) 20px 0;
+      text-align: center;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
-      line-height: 1.2;
+      margin: 0 auto;
+      color: white;
+      font: 800 clamp(1.25rem, 3.8vw, 2.6rem)/1.15 system-ui, sans-serif;
+      text-wrap: balance;
+      text-shadow: 0 2px 8px #100c23, 0 0 24px #100c23;
     }
 
-    p {
-      margin: 16px 0 0;
-      font-size: clamp(1rem, 3vw, 1.15rem);
-      line-height: 1.6;
+    .mensaje {
+      max-width: 44ch;
+      margin: 12px auto 0;
+      color: white;
+      font: 500 clamp(0.9rem, 2.1vw, 1.1rem)/1.5 system-ui, sans-serif;
+      text-shadow: 0 2px 8px #100c23, 0 0 24px #100c23;
     }
 
-    .cargando {
-      position: relative;
-      width: 80px;
-      aspect-ratio: 1;
-      margin: 0 auto 28px;
-      animation: girar 1.2s steps(16) infinite;
-    }
-
-    .cargando span {
-      position: absolute;
+    .celebracion {
+      position: fixed;
       inset: 0;
-      transform: rotate(calc(var(--posicion) * 22.5deg));
+      overflow: hidden;
+      pointer-events: none;
     }
 
-    .cargando span::before {
-      display: block;
-      width: 7%;
-      height: 21%;
-      margin-inline: auto;
-      border-radius: 999px;
-      background: #161616;
-      opacity: calc(1 - var(--posicion) * 0.055);
-      content: "";
+    .baile {
+      position: fixed;
+      inset-inline: 0;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      display: flex;
+      justify-content: center;
+      gap: clamp(4px, 3vw, 36px);
+      pointer-events: none;
     }
 
-    @keyframes girar {
-      to { transform: rotate(1turn); }
+    .baile img {
+      width: clamp(64px, 18vw, 120px);
+      height: auto;
+      animation: bailar 800ms ease-in-out infinite alternate;
+    }
+
+    .baile img:nth-child(2) { animation-delay: -400ms; }
+    .baile img:nth-child(3) { animation-delay: -800ms; }
+
+    @keyframes bailar {
+      from { transform: translateY(0) rotate(-12deg); }
+      to { transform: translateY(-18px) rotate(12deg); }
+    }
+
+    .emoji {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      font-size: var(--tamano);
+      line-height: 1;
+      animation: subir var(--duracion) linear both;
+    }
+
+    @keyframes subir {
+      0% { transform: translate(calc(-50% + var(--inicio)), 0); }
+      85% { opacity: 1; }
+      100% {
+        transform: translate(calc(-50% + var(--destino)), calc(-100vh - 2em));
+        opacity: 0;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .cargando {
-        animation: none;
-      }
+      .celebracion { display: none; }
+      .baile img { animation: none; }
     }
   </style>
 </head>
 <body>
   <main>
-    <div class="cargando" aria-hidden="true">
-      <span style="--posicion: 0"></span>
-      <span style="--posicion: 1"></span>
-      <span style="--posicion: 2"></span>
-      <span style="--posicion: 3"></span>
-      <span style="--posicion: 4"></span>
-      <span style="--posicion: 5"></span>
-      <span style="--posicion: 6"></span>
-      <span style="--posicion: 7"></span>
-      <span style="--posicion: 8"></span>
-      <span style="--posicion: 9"></span>
-      <span style="--posicion: 10"></span>
-      <span style="--posicion: 11"></span>
-      <span style="--posicion: 12"></span>
-      <span style="--posicion: 13"></span>
-      <span style="--posicion: 14"></span>
-      <span style="--posicion: 15"></span>
-    </div>
-    <h1>🚧 Pagina en remodelación 🏗️</h1>
-    <p>Ups, lo siento amor, creo que la pagina de tus flores esta indisponible debido a una sorpresa que aparecerá en los próximos días</p>
+    <h1>¡¡ FELICIDADES POR APROBAR !!<br>
+      ¡¡ PULGUITA ERES PSICÓLOGA 🥳!!</h1>
+    <p class="mensaje">siempre supe que lo lograrías, eres muy inteligente amor, te admiro muchísimo ❤️</p>
   </main>
+  <div class="celebracion" aria-hidden="true"></div>
+  <div class="baile">
+    <img src="godcat-transparente.png" alt="Tres Godcat bailando" width="1254" height="1254">
+    <img src="godcat-transparente.png" alt="" width="1254" height="1254">
+    <img src="godcat-transparente.png" alt="" width="1254" height="1254">
+  </div>
+  <script>
+    const celebracion = document.querySelector(".celebracion");
+    const emojis = ["🎉", "🎈", "💐", "🌺", "✨"];
+    const reducirMovimiento = matchMedia("(prefers-reduced-motion: reduce)");
+    let siguienteEmoji = 0;
+
+    setInterval(() => {
+      if (reducirMovimiento.matches) return;
+
+      const emoji = document.createElement("span");
+      const duracion = 5000 + Math.random() * 3000;
+      const direccion = Math.random() < 0.5 ? -1 : 1;
+      emoji.className = "emoji";
+      emoji.textContent = emojis[siguienteEmoji];
+      siguienteEmoji = (siguienteEmoji + 1) % emojis.length;
+
+      emoji.style.setProperty("--inicio", `${direccion * (28 + Math.random() * 15)}vw`);
+      emoji.style.setProperty("--destino", `${direccion * (28 + Math.random() * 15)}vw`);
+      emoji.style.setProperty("--tamano", `${1.5 + Math.random() * 1.25}rem`);
+      emoji.style.setProperty("--duracion", `${duracion}ms`);
+      celebracion.append(emoji);
+      setTimeout(() => emoji.remove(), duracion);
+    }, 450);
+  </script>
 </body>
 </html>
